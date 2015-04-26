@@ -11,14 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425201319) do
-
-  create_table "estimates", force: :cascade do |t|
-    t.string   "candidate"
-    t.decimal  "value"
-    t.string   "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
