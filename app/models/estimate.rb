@@ -34,15 +34,15 @@ class Estimate < ActiveRecord::Base
             hash[:choice] == candidate1
           end[:value]
 
-          return_hash[estimate[:date]][candidate2.to_sym] = estimate[:estimates].find do |hash|
-            hash[:choice] == candidate2
+           estimate[:estimates].each do |hash|
+            if hash[:choice] == candidate2
+              return_hash[estimate[:date]][candidate2.to_sym] = hash[:value]
+            end
           end
-
         end
       end
     end
     return_hash
-    binding.pry
   end
 end
 
