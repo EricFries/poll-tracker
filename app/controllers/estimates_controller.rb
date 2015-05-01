@@ -4,7 +4,20 @@ class EstimatesController < ApplicationController
   # GET /estimates
   # GET /estimates.json
   def index
-    Estimate.one_on_one_matchup(["Sanders", "O'Malley"])
+    @custom_matchup = Estimate.custom_matchup(["Sanders", "Clinton"])
+
+    #these need to be made dynamically
+    @sanders_array = Estimate.make_chart_array("Sanders", @custom_matchup)
+    @clinton_array = Estimate.make_chart_array("Clinton", @custom_matchup)
+
+    @linechart_dates = @custom_matchup.collect { |date,info| date.to_s}
+    #put dates in ascending order
+    @linechart_dates.reverse!
+    @array_of_polls = nil
+    #get count of number of candidates
+    # arrays_needed = @custom_matchup.values[0].length
+
+
     @dem_estimate = Estimate.latest_dem_chart
     @gop_estimate = Estimate.latest_gop_chart
 

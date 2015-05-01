@@ -6,13 +6,7 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
-  <!-- Load c3.css -->
-<link href="/path/to/c3.css" rel="stylesheet" type="text/css">
 
-<!-- Load d3.js and c3.js -->
-<script src="/path/to/d3.v3.min.js" charset="utf-8"></script>
-<script src="/path/to/c3.min.js"></script>
-</head>
 <body>
 
 <%= yield %>
