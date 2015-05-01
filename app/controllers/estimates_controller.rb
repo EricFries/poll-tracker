@@ -21,9 +21,6 @@ class EstimatesController < ApplicationController
     @gop_poll_numbers = @gop_estimate.collect do |can_hash| 
       can_hash[:value]
     end
-
-
-
   end
 
   # GET /estimates/1

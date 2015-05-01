@@ -3,47 +3,49 @@
   <h4>as of <%= @date = Time.now
   @date.strftime("%B %d, %Y") %></h4>
 
-
+  <div class="col-md-6">
   <h2>Democratic Primary Polling Averages</h2>
-  <canvas id="demChart" width="400" height="400"></canvas>
-  <script> var ctx = document.getElementById("demChart").getContext("2d");
-    
-    var data = {
-        labels: <%= raw @dem_candidates %>,
-        datasets: [
-            {
-                label: "Democratic Primary Polling Averages",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
-                data: <%= raw @dem_poll_numbers %>
-            }
-        ]
-    };
-    var myNewChart = new Chart(ctx).Bar(data);
-  </script>
-
-  <h2>Republican Primary Polling Averages</h2>
- <canvas id="gopChart" width="400" height="400"></canvas>
-  <script>
-  var ctx = document.getElementById("gopChart").getContext("2d");
-    
-    var gopData = {
-        labels: <%= raw @gop_candidates %>,
-        datasets: [
-            {
-                label: "Republican Primary Polling Averages",
-                fillColor: "rgba(255,0,0,0.5)",
-                strokeColor: "rgba(255,0,0,0.8)",
-                highlightFill: "rgba(255,0,0,0.75)",
-                highlightStroke: "rgba(255,0,0,1)",
-                data: <%= raw @gop_poll_numbers %>
-            }
-        ]
-    };
-    var gopChart = new Chart(ctx).Bar(gopData);
+    <canvas id="demChart" width="400" height="400"></canvas>
+    <script> var ctx = document.getElementById("demChart").getContext("2d");
+      
+      var data = {
+          labels: <%= raw @dem_candidates %>,
+          datasets: [
+              {
+                  label: "Democratic Primary Polling Averages",
+                  fillColor: "rgba(151,187,205,0.5)",
+                  strokeColor: "rgba(151,187,205,0.8)",
+                  highlightFill: "rgba(151,187,205,0.75)",
+                  highlightStroke: "rgba(151,187,205,1)",
+                  data: <%= raw @dem_poll_numbers %>
+              }
+          ]
+      };
+      var myNewChart = new Chart(ctx).Bar(data);
     </script>
+  </div>
 
+  <div class="col-md-6">
+    <h2>Republican Primary Polling Averages</h2>
+    <canvas id="gopChart" width="400" height="400"></canvas>
+    <script>
+    var ctx = document.getElementById("gopChart").getContext("2d");
+      
+      var gopData = {
+          labels: <%= raw @gop_candidates %>,
+          datasets: [
+              {
+                  label: "Republican Primary Polling Averages",
+                  fillColor: "rgba(255,0,0,0.5)",
+                  strokeColor: "rgba(255,0,0,0.8)",
+                  highlightFill: "rgba(255,0,0,0.75)",
+                  highlightStroke: "rgba(255,0,0,1)",
+                  data: <%= raw @gop_poll_numbers %>
+              }
+          ]
+      };
+      var gopChart = new Chart(ctx).Bar(gopData);
+      </script>
+    </div>
   <h6>Data courtesy of the Huffington Post's <%=link_to "Pollster API", "http://elections.huffingtonpost.com/pollster/api"  %></h6>
 </center>
