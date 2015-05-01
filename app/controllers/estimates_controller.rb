@@ -8,20 +8,11 @@ class EstimatesController < ApplicationController
     @dem_estimate = Estimate.latest_dem_chart
     @gop_estimate = Estimate.latest_gop_chart
 
-    @dem_candidates = @dem_estimate.collect do |can_hash| 
-      can_hash[:choice]
-    end
-    @dem_poll_numbers = @dem_estimate.collect do |can_hash| 
-      can_hash[:value]
-    end
+    @dem_candidates = @dem_estimate.collect {|can_hash| can_hash[:choice]}
+    @dem_poll_numbers = @dem_estimate.collect {|can_hash| can_hash[:value]}
 
-    @gop_candidates = @gop_estimate.collect do |can_hash|
-      can_hash[:choice]
-    end
-
-    @gop_poll_numbers = @gop_estimate.collect do |can_hash| 
-      can_hash[:value]
-    end
+    @gop_candidates = @gop_estimate.collect {|can_hash| can_hash[:choice]}
+    @gop_poll_numbers = @gop_estimate.collect {|can_hash| can_hash[:value]}
   end
 
   # POST /estimates
