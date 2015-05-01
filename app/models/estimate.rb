@@ -32,7 +32,7 @@ class Estimate < ActiveRecord::Base
   end
 
   #candidats is an array
-  def self.one_on_one_matchup(candidates)
+  def self.custom_matchup(candidates)
     state = self.load_iowa
     return_hash = self.populate_date_hash(state, candidates)
 

@@ -5,9 +5,31 @@
       <h4>as of <%= @date = Time.now
       @date.strftime("%B %d, %Y") %></h4>
     </div>
+  <div class = "row">
+    <div id="linechart"></div>
+    <script>
+    var chart = c3.generate({
+    bindto: '#linechart',
+    data: {
+      columns: [
+        ['data1', null, 100, 100, null, 150, 100],
+        ['data2', 50, 20, 10, 40, 15, 25]
+      ]
+    },
+     axis: {
+        x: {
+            type: 'category',
+            categories: <%= raw @linechart_dates %>
+        }
+    }
+});
+
+
+
+</script>
+  <div>
 
   <div class = "row">
-  
     <div class="col-md-6">
       <h4>Democratic Primary Polling Averages</h4>
       <canvas id="demChart" width="400" height="400"></canvas>
