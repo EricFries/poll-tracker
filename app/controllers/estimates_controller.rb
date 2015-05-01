@@ -4,6 +4,7 @@ class EstimatesController < ApplicationController
   # GET /estimates
   # GET /estimates.json
   def index
+    Estimate.biden_clinton_hash
     @dem_estimate = Estimate.latest_dem_chart
     @gop_estimate = Estimate.latest_gop_chart
 
@@ -21,20 +22,6 @@ class EstimatesController < ApplicationController
     @gop_poll_numbers = @gop_estimate.collect do |can_hash| 
       can_hash[:value]
     end
-  end
-
-  # GET /estimates/1
-  # GET /estimates/1.json
-  def show
-  end
-
-  # GET /estimates/new
-  def new
-    @estimate = Estimate.new
-  end
-
-  # GET /estimates/1/edit
-  def edit
   end
 
   # POST /estimates

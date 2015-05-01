@@ -19,13 +19,24 @@ class Estimate < ActiveRecord::Base
     end
 
     iw.estimates_by_date.each do |estimate|
-      return_hash.find do |k,v|
-        return_hash[k] == estimate[:date]
-        puts return_hash[k]
-      end
+      return_hash.each do |k,v|
 
+        if k == estimate[:date]
+           return_hash[estimate[:date]][:clinton] = estimate[:estimates].find do |hash|
+            hash[:choice] == "Clinton"
+          end[:value]
+
+          return_hash[estimate[:date]][:biden] = estimate[:estimates].find do |hash|
+            hash[:choice] == "Biden"
+
+          end
+
+        end
+      end
     end
+                binding.pry
     return_hash
+
   end
 
 end
