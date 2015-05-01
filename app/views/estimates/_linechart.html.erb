@@ -1,0 +1,20 @@
+<h4>Iowa Caucus Polling Averages</h4>
+    <div id="linechart"></div>
+    <script>
+    var chart = c3.generate({
+    bindto: '#linechart',
+    data: {
+      columns: [
+        <%= raw @clinton_array %>,
+        <%= raw @sanders_array %>
+      ]
+    },
+     axis: {
+        x: {
+            type: 'category',
+            categories: <%= raw @linechart_dates %>
+        }
+    }
+});
+
+</script>
