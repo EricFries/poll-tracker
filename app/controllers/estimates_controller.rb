@@ -4,7 +4,7 @@ class EstimatesController < ApplicationController
   # GET /estimates
   # GET /estimates.json
   def index
-    Estimate.populate_hash_with_polls
+    Estimate.one_on_one_matchup("Clinton", "Biden")
     @dem_estimate = Estimate.latest_dem_chart
     @gop_estimate = Estimate.latest_gop_chart
 

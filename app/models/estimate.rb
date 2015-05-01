@@ -13,28 +13,29 @@ class Estimate < ActiveRecord::Base
   end
 
   #Add all poll dates to hash
-  def self.populate_date_hash(estimate)
+  def self.populate_date_hash(state_estimate, candidate1, candidate2)
   return_hash = {}
    self.load_iowa.estimates_by_date.each do |estimate|
-      return_hash[estimate[:date]] = {:biden => nil, :clinton => nil}
+      return_hash[estimate[:date]] = {candidate1.to_sym => nil, candidate2.to_sym => nil}
     end
     return_hash
   end
 
-  def self.populate_hash_with_polls
+  def self.one_on_one_matchup(candidate1,candidate2)
     state = self.load_iowa
-    return_hash = self.populate_date_hash(state)
+    return_hash = self.populate_date_hash(state, candidate1, candidate2)
 
+    #add polls numbers for the 2 candidates to the hash
     state.estimates_by_date.each do |estimate|
       return_hash.each do |k,v|
 
         if k == estimate[:date]
-           return_hash[estimate[:date]][:clinton] = estimate[:estimates].find do |hash|
-            hash[:choice] == "Clinton"
+           return_hash[estimate[:date]][candidate1.to_sym] = estimate[:estimates].find do |hash|
+            hash[:choice] == candidate1
           end[:value]
 
-          return_hash[estimate[:date]][:biden] = estimate[:estimates].find do |hash|
-            hash[:choice] == "Biden"
+          return_hash[estimate[:date]][candidate2.to_sym] = estimate[:estimates].find do |hash|
+            hash[:choice] == candidate2
           end
 
         end
