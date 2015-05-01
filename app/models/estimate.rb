@@ -1,4 +1,5 @@
 class Estimate < ActiveRecord::Base
+  belongs_to :candidate
 
   def self.latest_dem_chart
     Pollster::Chart.where(:topic => '2016-president-dem-primary').first.estimates
@@ -31,7 +32,7 @@ class Estimate < ActiveRecord::Base
     return_hash
   end
 
-  #candidats is an array
+  #candidates is an array
   def self.custom_matchup(candidates)
     state = self.load_iowa
     return_hash = self.populate_date_hash(state, candidates)
@@ -51,6 +52,19 @@ class Estimate < ActiveRecord::Base
       end
     end
     return_hash
+  end
+
+  #must be uppercase
+  def self.make_chart_array(candidate, custom_matchup)
+    holder = []
+    custom_matchup.each do |date,can_hash|
+      can_hash.each do |k,v|
+        if k == candidate.to_sym
+          holder << v.to_i
+        end
+      end
+    end
+    holder.push(candidate).reverse
   end
 
 end
