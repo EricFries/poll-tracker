@@ -43,7 +43,6 @@ class Estimate < ActiveRecord::Base
           if k == estimate[:date]
              estimate[:estimates].each do |hash|
               if hash[:choice] == candidate
-                            # binding.pry
                 return_hash[estimate[:date]][candidate.to_sym] = hash[:value]
               end
             end
@@ -52,7 +51,6 @@ class Estimate < ActiveRecord::Base
       end
     end
     return_hash
-    binding.pry
   end
 
 end
