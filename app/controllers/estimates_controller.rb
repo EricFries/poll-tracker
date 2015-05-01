@@ -4,11 +4,13 @@ class EstimatesController < ApplicationController
   # GET /estimates
   # GET /estimates.json
   def index
-    @custom_matchup = Estimate.custom_matchup(["Sanders", "Clinton"])
+    @custom_matchup = Estimate.custom_matchup(["Sanders", "Clinton", "Biden"])
 
     #these need to be made dynamically
     @sanders_array = Estimate.make_chart_array("Sanders", @custom_matchup)
     @clinton_array = Estimate.make_chart_array("Clinton", @custom_matchup)
+    @biden_array = Estimate.make_chart_array("Biden", @custom_matchup)
+    # binding.pry
 
     @linechart_dates = @custom_matchup.collect { |date,info| date.to_s}
     #put dates in ascending order

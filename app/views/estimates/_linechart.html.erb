@@ -1,12 +1,40 @@
 <h4>Iowa Caucus Polling Averages</h4>
     <div id="linechart"></div>
     <script>
+
+    var candidate1 = <%= raw @clinton_array %>;
+    for (x in candidate1)
+{
+    if (candidate1[x] === 0.0){
+        candidate1[x] = null
+    };
+}
+
+
+    var candidate2 = <%= raw @sanders_array %>;
+    for (x in candidate1)
+{
+    if (candidate2[x] === 0.0){
+        candidate2[x] = null
+    };
+}
+
+    var candidate3 = <%= raw @biden_array %>;
+    for (x in candidate1)
+{
+    if (candidate3[x] === 0.0){
+        candidate3[x] = null
+    };
+}
+
+
     var chart = c3.generate({
     bindto: '#linechart',
     data: {
       columns: [
-        <%= raw @clinton_array %>,
-        <%= raw @sanders_array %>
+        candidate1,
+        candidate2,
+        candidate3
       ]
     },
      axis: {
