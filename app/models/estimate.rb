@@ -8,17 +8,24 @@ class Estimate < ActiveRecord::Base
     Pollster::Chart.where(:topic => '2016-president-gop-primary').first.estimates
   end
 
-  def self.biden_clinton_hash
-    iw = Pollster::Chart.where(:topic => '2016-president-dem-primary')[1]
-   return_hash = {}
-    #Add all Iowa poll dates to hash
-    iw.estimates_by_date.each do |estimate|
-      return_hash[estimate[:date]] = {:biden => nil, :clinton => nil}
-      # estimate[:estimates].select {|cand_hash| cand_hash[:choice] == "Biden"}
-      # return_hash[estimate[:date]] = estimate[:estimates].select {|cand_hash| cand_hash[:choice] == "Clinton"}
-    end
+  def self.load_iowa
+    Pollster::Chart.where(:topic => '2016-president-dem-primary')[1]
+  end
 
-    iw.estimates_by_date.each do |estimate|
+  #Add all poll dates to hash
+  def self.populate_date_hash(estimate)
+  return_hash = {}
+   self.load_iowa.estimates_by_date.each do |estimate|
+      return_hash[estimate[:date]] = {:biden => nil, :clinton => nil}
+    end
+    return_hash
+  end
+
+  def self.populate_hash_with_polls
+    state = self.load_iowa
+    return_hash = self.populate_date_hash(state)
+
+    state.estimates_by_date.each do |estimate|
       return_hash.each do |k,v|
 
         if k == estimate[:date]
@@ -28,16 +35,13 @@ class Estimate < ActiveRecord::Base
 
           return_hash[estimate[:date]][:biden] = estimate[:estimates].find do |hash|
             hash[:choice] == "Biden"
-
           end
 
         end
       end
     end
-                binding.pry
     return_hash
-
+    binding.pry
   end
-
 end
 
