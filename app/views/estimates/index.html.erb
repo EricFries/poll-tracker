@@ -2,77 +2,16 @@
   <div class = "container-fluid">
     <div class = "row">
       <h1>2016 Presidential Election PollTracker</h1>
-      <h4>as of <%= @date = Time.now
-      @date.strftime("%B %d, %Y") %></h4>
+      <p>as of <%= @date = Time.now
+      @date.strftime("%B %d, %Y") %></p>
     </div>
   <div class = "row">
-    <div id="linechart"></div>
-    <script>
-    var chart = c3.generate({
-    bindto: '#linechart',
-    data: {
-      columns: [
-        <%= raw @clinton_array %>,
-        <%= raw @sanders_array %>
-      ]
-    },
-     axis: {
-        x: {
-            type: 'category',
-            categories: <%= raw @linechart_dates %>
-        }
-    }
-});
-
-
-
-</script>
+    <%= render "linechart" %>
   <div>
 
   <div class = "row">
     <div class="col-md-6">
-      <h4>Democratic Primary Polling Averages</h4>
-      <canvas id="demChart" width="400" height="400"></canvas>
-      <script> var ctx = document.getElementById("demChart").getContext("2d");
-        
-        var data = {
-            labels: <%= raw @dem_candidates %>,
-            datasets: [
-                {
-                    label: "Democratic Primary Polling Averages",
-                    fillColor: "rgba(151,187,205,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: <%= raw @dem_poll_numbers %>
-                }
-            ]
-        };
-        var myNewChart = new Chart(ctx).Bar(data);
-      </script>
-    </div>
-
-    <div class="col-md-6">
-      <h4>Republican Primary Polling Averages</h4>
-      <canvas id="gopChart" width="400" height="400"></canvas>
-      <script>
-      var ctx = document.getElementById("gopChart").getContext("2d");
-        
-        var gopData = {
-            labels: <%= raw @gop_candidates %>,
-            datasets: [
-                {
-                    label: "Republican Primary Polling Averages",
-                    fillColor: "rgba(255,0,0,0.5)",
-                    strokeColor: "rgba(255,0,0,0.8)",
-                    highlightFill: "rgba(255,0,0,0.75)",
-                    highlightStroke: "rgba(255,0,0,1)",
-                    data: <%= raw @gop_poll_numbers %>
-                }
-            ]
-        };
-        var gopChart = new Chart(ctx).Bar(gopData);
-        </script>
+      <%= render "nationalaverages" %>
       </div>
 
     </div>

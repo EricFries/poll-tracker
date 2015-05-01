@@ -6,6 +6,7 @@ class EstimatesController < ApplicationController
   def index
     @custom_matchup = Estimate.custom_matchup(["Sanders", "Clinton"])
 
+    #these need to be made dynamically
     @sanders_array = Estimate.make_chart_array("Sanders", @custom_matchup)
     @clinton_array = Estimate.make_chart_array("Clinton", @custom_matchup)
 

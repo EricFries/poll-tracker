@@ -60,7 +60,7 @@ class Estimate < ActiveRecord::Base
     custom_matchup.each do |date,can_hash|
       can_hash.each do |k,v|
         if k == candidate.to_sym
-          holder << v.to_i
+          holder << v.to_f
         end
       end
     end
