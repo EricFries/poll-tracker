@@ -10,6 +10,38 @@
 <body>
 
 <%= yield %>
+<center>
+  <div class = "container-fluid">
+    <div class = "row">
+      <h1>2016 Presidential Election PollTracker</h1>
+      <p>as of <%= @date = Time.now
+      @date.strftime("%B %d, %Y") %></p>
+    </div>
+
+  <div class = "row">
+		<h4>Iowa Caucus Polling Averages</h4>
+    	<div id="linechart"></div>
+
+
+  </div>
+
+  <div class = "row">
+    <div class="col-md-6">
+      <h4>Democratic Primary National Polling Averages</h4>
+      <canvas id="demChart" width="400" height="400"></canvas>
+    </div>
+
+     <div class="col-md-6">
+      <h4>Republican Primary National Polling Averages</h4>
+      <canvas id="gopChart" width="400" height="400"></canvas>
+   	 </div>
+
+    <div class="row">
+      <h6>Data courtesy of the Huffington Post's <%=link_to "Pollster API", "http://elections.huffingtonpost.com/pollster/api"  %></h6>
+    </div>
+  </div>
+
+</center>
 
 </body>
 </html>

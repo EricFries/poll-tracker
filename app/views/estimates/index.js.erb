@@ -1,0 +1,77 @@
+// render Iowa caucus linechart
+var candidate1 = <%= raw @clinton_array %>;
+	for (x in candidate1) {
+	  if (candidate1[x] === 0.0){
+	        candidate1[x] = null
+	    };
+	}
+
+var candidate2 = <%= raw @sanders_array %>;
+  for (x in candidate1) {
+    if (candidate2[x] === 0.0){
+        candidate2[x] = null
+    };
+	}
+
+var candidate3 = <%= raw @biden_array %>;
+  for (x in candidate1) {
+    if (candidate3[x] === 0.0){
+        candidate3[x] = null
+    };
+}
+
+
+var chart = c3.generate({
+  bindto: '#linechart',
+  data: {
+    columns: [
+      candidate1,
+      candidate2,
+      candidate3
+    ]
+  },
+   axis: {
+      x: {
+          type: 'category',
+          categories: <%= raw @linechart_dates %>
+      }
+  }
+});
+
+//render Democratic national average barchart
+var ctx = document.getElementById("demChart").getContext("2d");
+        
+var data = {
+	labels: <%= raw @dem_candidates %>,
+	datasets: [
+	  {
+	      label: "Democratic Primary Polling Averages",
+	      fillColor: "rgba(151,187,205,0.5)",
+	      strokeColor: "rgba(151,187,205,0.8)",
+	      highlightFill: "rgba(151,187,205,0.75)",
+	      highlightStroke: "rgba(151,187,205,1)",
+	      data: <%= raw @dem_poll_numbers %>
+	  }
+	]
+};
+
+var myNewChart = new Chart(ctx).Bar(data);
+
+//render GOP national average barchart
+var ctx = document.getElementById("gopChart").getContext("2d");
+        
+var gopData = {
+    labels: <%= raw @gop_candidates %>,
+    datasets: [
+	    {
+	        label: "Republican Primary Polling Averages",
+	        fillColor: "rgba(255,0,0,0.5)",
+	        strokeColor: "rgba(255,0,0,0.8)",
+	        highlightFill: "rgba(255,0,0,0.75)",
+	        highlightStroke: "rgba(255,0,0,1)",
+	        data: <%= raw @gop_poll_numbers %>
+	    }
+    ]
+};
+
+var gopChart = new Chart(ctx).Bar(gopData);
